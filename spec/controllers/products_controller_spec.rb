@@ -1,27 +1,29 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
   let(:product_attributes) do
     {
-      name: "New",
-      model: "sp",
-      brand: "Armstrong",
+      name: 'New',
+      model: 'sp',
+      brand: 'Armstrong',
       year: 2013,
       ram: 0.8e1,
       external_storage: 0.96e2
     }
   end
 
-  let!(:product) {
+  let!(:product) do
     Product.create(
-      name: "New1",
-      model: "sp1",
-      brand: "Armstrong",
+      name: 'New1',
+      model: 'sp1',
+      brand: 'Armstrong',
       year: 2013,
       ram: 0.8e1,
       external_storage: 0.96e2
     )
-  }
+  end
 
   describe 'new#action' do
     it 'should return login template' do

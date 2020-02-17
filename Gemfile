@@ -72,3 +72,6 @@ gem 'jquery-rails'
 gem 'bootstrap'
 
 gem 'will_paginate-bootstrap'
+
+gem 'axlsx'
+gem "axlsx_rails"

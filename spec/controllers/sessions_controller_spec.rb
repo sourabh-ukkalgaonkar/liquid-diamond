@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-  let!(:user) {
+  let!(:user) do
     User.create(name: 'Tester',
-    email: 'tester@yopmail.com',
-    password: '123456',
-    password_confirmation: '123456')
-  }
+                email: 'tester@yopmail.com',
+                password: '123456',
+                password_confirmation: '123456')
+  end
 
   describe 'new#action' do
     it 'should return login template' do

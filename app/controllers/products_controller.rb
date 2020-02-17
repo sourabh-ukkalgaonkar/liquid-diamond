@@ -1,20 +1,20 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy]
 
   def index
     @products = Product.search(params[:search])
-                .paginate(per_page: 25, :page => params[:page])
+                       .paginate(per_page: 25, page: params[:page])
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product = Product.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @product = Product.new(product_params)
@@ -40,10 +40,10 @@ class ProductsController < ApplicationController
 
   def export
     @products = Product.search(params[:search])
-                .paginate(per_page: 25, :page => params[:page])
+                       .paginate(per_page: 25, page: params[:page])
 
     respond_to do |format|
-      format.xlsx {render xlsx: 'export', filename: "products.xlsx"}
+      format.xlsx { render xlsx: 'export', filename: 'products.xlsx' }
     end
   end
 
