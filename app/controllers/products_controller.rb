@@ -50,7 +50,8 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.find_by_id(params[:id])
+    redirect_to products_path if @product.blank?
   end
 
   def product_params
