@@ -58,6 +58,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
