@@ -70,3 +70,5 @@ gem 'bcrypt'
 gem 'jquery-rails'
 
 gem 'bootstrap'
+
+gem 'will_paginate-bootstrap'
