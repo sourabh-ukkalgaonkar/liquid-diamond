@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @products = Product.search(params[:search])
+                .paginate(per_page: 25, :page => params[:page])
   end
 
   def show
@@ -22,7 +23,6 @@ class ProductsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def update
@@ -38,12 +38,16 @@ class ProductsController < ApplicationController
     redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
-  private
-    def set_products
-      @product = Product.find(params[:id])
-    end
+  def export
+  end
 
-    def product_params
-      params.require(:product).permit(:name, :model, :brand, :year, :ram, :external_storage)
-    end
+  private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :model, :brand, :year, :ram, :external_storage)
+  end
 end

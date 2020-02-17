@@ -1,35 +1,75 @@
-<p id="notice"><%= notice %></p>
+<div class='container'>
+  <p id="notice"><%= notice %></p>
+  <h1>Products</h1>
 
-<h1>Products</h1>
+  <div class='col-md-12'>
+    <%= form_tag products_path, :method => 'get' do %>
+      <div class='row'>
+        <div class='form-group col-md-3'>
+          <%= text_field_tag 'search[name]', params[:search] && params[:search][:name], placeholder: 'name', class: 'form-control'  %>
+        </div>
+        <div class='form-group col-md-3'>
+          <%= text_field_tag 'search[model]', params[:search] && params[:search][:model], placeholder: 'model', class: 'form-control' %>
+        </div>
 
-<%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+        <div class='form-group col-md-3'>
+          <%= text_field_tag 'search[brand]', params[:search] && params[:search][:brand], placeholder: 'brand', class: 'form-control' %>
+        </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Model</th>
-      <th>Brand</th>
-      <th>Year</th>
-      <th>Ram</th>
-      <th>External storage</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <div class='form-group col-md-3'>
+          <%= select_tag 'search[year]', options_for_select(Product::YEARS, params[:search] && params[:search][:year]), class: 'form-control col-md-3', class: 'form-control', prompt: 'Select Year' %>
+        </div>
+      </div>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.model %></td>
-        <td><%= product.brand %></td>
-        <td><%= product.year %></td>
-        <td><%= product.ram %></td>
-        <td><%= product.external_storage %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class='row'>
+        <div class='form-group col-md-3'>
+          <%= select_tag 'search[ram]', options_for_select((1..8).to_a, params[:search] && params[:search][:ram]), class: 'form-control col-md-3', prompt: 'Select Ram' %>
+        </div>
+
+        <div class='form-group col-md-3'>
+          <%= select_tag 'search[external_storage]', options_for_select((1..4).to_a.map{|i| i*32}, params[:search] && params[:search][:external_storage]), class: 'form-control col-md-3', prompt: 'Select Storage' %>
+        </div>
+        <div class='form-group col-md-3'>
+          <%= submit_tag "Search", :name => nil, class: 'btn btn-primary' %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+
+    <%= link_to 'Clear Filters', products_path %>
+  </div>
+  <br>
+  <div >
+    <% if @products.present? %>
+      <table id='myTable' class='table'>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Model</th>
+          <th>Brand</th>
+          <th>Year</th>
+          <th>Ram</th>
+          <th>External storage</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= link_to product.id, product_path(product.id) %></td>
+            <td><%= product.name %></td>
+            <td><%= product.model %></td>
+            <td><%= product.brand %></td>
+            <td><%= product.year %></td>
+            <td><%= product.ram %></td>
+            <td><%= product.external_storage %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+    <% else %>
+      Products not found
+    <% end %>
+  </div>
+  <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+</div>
