@@ -1,0 +1,49 @@
+<div class='container'>
+  <%= form_with(model: product, local: true) do |f| %>
+    <% if product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+        <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class='form-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', id: 'email', required: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= f.label :model %>
+      <%= f.text_field :model, class: 'form-control', id: 'email', required: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= f.label :brand %>
+      <%= f.text_field :brand, class: 'form-control', id: 'email', required: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= f.label :year %>
+      <%= f.number_field :year, class: 'form-control', id: 'email', required: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= f.label :ram %>
+      <%= f.text_field :ram, class: 'form-control', id: 'email', required: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= f.label :external_storage %>
+      <%= f.text_field :external_storage, class: 'form-control', id: 'email', required: true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'submit', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
