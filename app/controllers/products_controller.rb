@@ -39,6 +39,12 @@ class ProductsController < ApplicationController
   end
 
   def export
+    @products = Product.search(params[:search])
+                .paginate(per_page: 25, :page => params[:page])
+
+    respond_to do |format|
+      format.xlsx {render xlsx: 'export', filename: "products.xlsx"}
+    end
   end
 
   private

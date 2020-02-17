@@ -36,6 +36,7 @@
     <% end %>
 
     <%= link_to 'Clear Filters', products_path %>
+    <%= link_to 'Export Result', export_products_path(search:  permited_attributes(params), format: 'xlsx') %>
   </div>
   <br>
   <div >
@@ -49,7 +50,7 @@
           <th>Brand</th>
           <th>Year</th>
           <th>Ram</th>
-          <th>External storage</th>
+          <th>External Storage</th>
         </tr>
       </thead>
 

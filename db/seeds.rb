@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+(0..1000).each do
+  Product.create(
+    name: Faker::Team.name.split(' ').first.remove(','),
+    model: Faker::Company.sic_code,
+    brand: Faker::Company.name.split(' ').first.remove(','),
+    year: rand(10.years).seconds.ago.year,
+    ram: (1..8).to_a.sample,
+    external_storage: (1..4).to_a.map{|i| i*32}.sample
+  )
+end
